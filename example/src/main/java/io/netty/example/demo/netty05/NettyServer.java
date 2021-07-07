@@ -1,4 +1,4 @@
-package io.netty.example.demo.netty04;
+package io.netty.example.demo.netty05;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -9,9 +9,10 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
  * Created on 2021/7/7.
- * netty通信就向一个流水channel管道，我们可以在管道的中间插入一些‘挡板’为我们服务。比如字符串的编码解码
- * ，在前面我们使用new StringDecoder(Charset.forName(“GBK”))进行字符串解码，这样我们在收取数据就不需要手动处理字节码。
- * 那么本章节我们使用与之对应的new StringEncoder(Charset.forName(“GBK”))进行进行字符串编码，用以实现服务端在发送数据的时候只需要传输字符串内容即可。
+ *在微信或者QQ的聊天中我们经常会用到一些群聊，把你的信息发送给所有用户。
+ * 那么为了实现群发消息，在netty中我们可以使用ChannelGroup方式进行群发消息。
+ * 如果为了扩展验证比如你实际聊天有不同的群，那么可以定义ConcurrentHashMap结构来存放ChannelGroup。
+ * ChannelGroup中提供了一些基础的方法；添加、异常、查找、清空、发放消息、关闭等。
  * @author xuebaopeng
  * Description
  */
@@ -40,5 +41,6 @@ public class NettyServer {
             childGroup.shutdownGracefully();
             parentGroup.shutdownGracefully();
         }
+
     }
 }

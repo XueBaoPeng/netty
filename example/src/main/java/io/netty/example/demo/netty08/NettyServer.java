@@ -1,4 +1,4 @@
-package io.netty.example.demo.netty04;
+package io.netty.example.demo.netty08;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -9,9 +9,9 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
  * Created on 2021/7/7.
- * netty通信就向一个流水channel管道，我们可以在管道的中间插入一些‘挡板’为我们服务。比如字符串的编码解码
- * ，在前面我们使用new StringDecoder(Charset.forName(“GBK”))进行字符串解码，这样我们在收取数据就不需要手动处理字节码。
- * 那么本章节我们使用与之对应的new StringEncoder(Charset.forName(“GBK”))进行进行字符串编码，用以实现服务端在发送数据的时候只需要传输字符串内容即可。
+ *在实际应用场景里，只要是支持sokcet通信的都可以和Netty交互，比如中继器、下位机、PLC等。
+ * 这些场景下就非常需要自定义编码解码器，来处理字节码传输，并控制半包、粘包以及安全问题。
+ * 那么本章节我们通过实现ByteToMessageDecoder、MessageToByteEncoder来实现我们的需求
  * @author xuebaopeng
  * Description
  */
@@ -40,5 +40,6 @@ public class NettyServer {
             childGroup.shutdownGracefully();
             parentGroup.shutdownGracefully();
         }
+
     }
 }
